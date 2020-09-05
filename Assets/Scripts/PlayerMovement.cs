@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    public GameObject graphics;
+    public CharacterController characterController;
+    public PlayerController playerController;
+    public Transform groundCheck;
+    public LayerMask groundMask;
+
     public float initialSpeed = 12f;
     public float jumpHeight = 5f;
     public float groundDistance = 1f;
-    public Transform groundCheck;
-    public LayerMask groundMask;
 
     private Vector3 velocity;
     private Camera mainCamera;
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         gravity = -9.81f * 2.5f;
         speed = initialSpeed;
-        playerHeight = graphics.transform.localScale.y;
+        playerHeight = playerController.graphics.transform.localScale.y;
     }
 
     private void Update()
@@ -40,13 +41,13 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        characterController.Move(move * speed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && isGrounded) Jump();
 
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        characterController.Move(velocity * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.LeftControl)) Crouch();
         if (isCrouched && Input.GetKeyUp(KeyCode.LeftControl)) Stand();
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     private void Crouch()
     {
         isCrouched = true;
-        controller.height = playerHeight;
+        characterController.height = playerHeight;
         gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, 0.5f, gameObject.transform.localScale.z);
         Walk();
     }
@@ -71,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     private void Stand()
     {
         isCrouched = false;
-        controller.height = playerHeight * 2f;
+        characterController.height = playerHeight * 2f;
         gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, 1f, gameObject.transform.localScale.z);
         Walk();
     }
