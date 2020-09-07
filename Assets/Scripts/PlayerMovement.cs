@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float initialSpeed = 12f;
     public float jumpHeight = 5f;
-    public float groundDistance = 1f;
+    public float groundDistance = 0.2f;
 
     private Vector3 velocity;
     private Camera mainCamera;
@@ -29,7 +29,14 @@ public class PlayerMovement : MonoBehaviour
         speed = initialSpeed;
         playerHeight = playerController.graphics.transform.localScale.y;
     }
-
+    /*
+    private void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(groundCheck.position, groundDistance);
+    }
+    */
     private void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);

@@ -44,6 +44,12 @@ public class PlayerController : MonoBehaviour
             case Tags.GameOver:
                 GameOver();
                 break;
+            case Tags.Trap:
+                TrapGoDown trap;
+                trap = hit.collider.gameObject.GetComponent<TrapGoDown>();
+                if (trap != null)
+                    trap.SetActivated(true);
+                break;
             default:
                 break;
         }
