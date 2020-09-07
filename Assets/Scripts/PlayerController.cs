@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public LevelController levelController;
     public GameObject graphics;
+    public AudioClip gameOverSound;
 
     private void Start()
     {
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour
         {
             case Tags.Checkpoint:
                 Checkpoint(hit.collider.gameObject);
+                break;
+            case Tags.Destructible:
+                hit.collider.gameObject.GetComponent<Destructible>().Shatter();
                 break;
             case Tags.Finish:
                 Finish();
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("Moreu");
+        AudioController.instance.PlayOneShot(gameOverSound);
         levelController.Respawn(gameObject);
     }
 }

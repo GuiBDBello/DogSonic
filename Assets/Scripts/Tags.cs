@@ -1,6 +1,7 @@
 ﻿public class Tags
 {
     public const string Checkpoint      = "Checkpoint";
+    public const string Destructible    = "Destructible";
     public const string Finish          = "Finish";
     public const string GameController  = "GameController";
     public const string GameOver        = "GameOver";
