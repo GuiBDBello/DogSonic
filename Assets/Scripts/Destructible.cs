@@ -18,7 +18,6 @@ public class Destructible : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider hit in colliders)
         {
-            Debug.Log(hit.name);
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
             if (rb != null)

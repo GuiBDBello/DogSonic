@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public LevelController levelController;
     public GameObject graphics;
+    public AudioClip jumpSound;
     public AudioClip gameOverSound;
 
     private void Start()
@@ -20,6 +21,21 @@ public class PlayerController : MonoBehaviour
         Debug.Log(collision);
         Debug.Log(collision.collider);
         Debug.Log(collision.collider.name);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Platform")
+        {
+            transform.parent = other.transform.parent;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Platform")
+        {
+            transform.parent = null;
+        }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

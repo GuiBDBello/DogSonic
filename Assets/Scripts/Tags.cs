@@ -7,4 +7,5 @@
     public const string GameOver        = "GameOver";
     public const string Player          = "Player";
     public const string Respawn         = "Respawn";
+    public const string Trap            = "Trap";
 }
