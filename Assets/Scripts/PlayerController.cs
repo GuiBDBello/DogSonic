@@ -16,28 +16,6 @@ public class PlayerController : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision);
-        Debug.Log(collision.collider);
-        Debug.Log(collision.collider.name);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Platform")
-        {
-            transform.parent = other.transform.parent;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Platform")
-        {
-            transform.parent = null;
-        }
-    }
-
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         /*
@@ -60,6 +38,9 @@ public class PlayerController : MonoBehaviour
             case Tags.GameOver:
                 GameOver();
                 break;
+            case Tags.MovingPlatform:
+                gameObject.transform.parent = hit.gameObject.transform;
+                break;
             case Tags.Trap:
                 TrapGoDown trap;
                 trap = hit.collider.gameObject.GetComponent<TrapGoDown>();
@@ -67,26 +48,24 @@ public class PlayerController : MonoBehaviour
                     trap.SetActivated(true);
                 break;
             default:
+                gameObject.transform.parent = null;
                 break;
         }
     }
 
     private void Checkpoint(GameObject checkpoint)
     {
-        Debug.Log("Pimba");
         levelController.SetCheckpoint(checkpoint.transform.position);
         Destroy(checkpoint);
     }
 
     private void Finish()
     {
-        Debug.Log("Cabol");
         levelController.Finish();
     }
 
     private void GameOver()
     {
-        Debug.Log("Moreu");
         AudioController.instance.PlayOneShot(gameOverSound);
         levelController.Respawn(gameObject);
     }

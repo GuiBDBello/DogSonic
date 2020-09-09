@@ -8,6 +8,7 @@ TagManager:
   - Checkpoint
   - Destructible
   - Trap
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
