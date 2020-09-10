@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         gravity = -9.81f * 2.5f;
         speed = initialSpeed;
-        playerHeight = playerController.graphics.transform.localScale.y;
+        playerHeight = playerController.player.transform.GetChild(0).transform.localScale.y;
     }
     /*
     private void OnDrawGizmos()

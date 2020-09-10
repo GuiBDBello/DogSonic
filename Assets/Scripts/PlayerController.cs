@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameController gameController;
 
     public LevelController levelController;
-    public GameObject graphics;
+    public GameObject player;
     public AudioClip jumpSound;
     public AudioClip gameOverSound;
+
+    private GameController gameController;
+    private PlayerMovement playerMovement;
+    private MouseLook mouseLook;
 
     private void Start()
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        playerMovement = player.GetComponent<PlayerMovement>();
+        mouseLook = Camera.main.GetComponent<MouseLook>();
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -66,7 +71,21 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
+        StartCoroutine("Respawn");
+    }
+
+    IEnumerator Respawn()
+    {
         AudioController.instance.PlayOneShot(gameOverSound);
+        mouseLook.enabled = false;
+        playerMovement.enabled = false;
+        player.GetComponent<CharacterController>().enabled = false;
+
+        yield return new WaitForSeconds(2.5f);
+
         levelController.Respawn(gameObject);
+        player.GetComponent<CharacterController>().enabled = true;
+        mouseLook.enabled = true;
+        playerMovement.enabled = true;
     }
 }

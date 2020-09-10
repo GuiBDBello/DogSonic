@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    public GameObject Player;
     public SceneController sceneController;
 
     private Vector3 checkpoint;
