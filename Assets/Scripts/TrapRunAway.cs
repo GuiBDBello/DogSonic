@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrapRunAway : Trap
 {
     public GameObject Finish;
+
     private Vector3 initialPosition;
 
     private void Start()

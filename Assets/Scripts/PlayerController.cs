@@ -14,9 +14,11 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement playerMovement;
     private MouseLook mouseLook;
 
+    float pushPower = 10.0f;
+
     private void Start()
     {
-        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        gameController = GameObject.FindGameObjectWithTag(Tags.GameController).GetComponent<GameController>();
         playerMovement = player.GetComponent<PlayerMovement>();
         mouseLook = Camera.main.GetComponent<MouseLook>();
     }
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour
                 GameOver();
                 break;
             case Tags.Trap:
-                Trap trap = other.gameObject.GetComponent<TrapRunAway>();
+                Trap trap = other.gameObject.GetComponent<Trap>();
                 if (trap != null)
                     trap.SetActivated(true);
                 break;
@@ -73,6 +75,14 @@ public class PlayerController : MonoBehaviour
                 break;
             default:
                 gameObject.transform.parent = null;
+                Rigidbody rb = hit.collider.attachedRigidbody;
+
+                // no rigidbody
+                if (rb == null || rb.isKinematic) { return; }
+                if (hit.moveDirection.y < 0) { return; }
+                Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+                rb.velocity = pushDir * pushPower;
+
                 break;
         }
     }

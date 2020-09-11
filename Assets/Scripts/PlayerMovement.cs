@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     */
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckCapsule(groundCheck.position, gameObject.transform.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0) velocity.y = -2f;
 
@@ -63,15 +63,20 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift) && !isCrouched) Walk();
     }
 
-    private void Jump()
+    public float getGravity()
     {
-        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        return gravity;
+    }
+
+    public void ThrowPlayerUp()
+    {
+        velocity.y = Mathf.Sqrt((jumpHeight * 10) * -2f * gravity);
         AudioController.instance.PlayOneShot(playerController.jumpSound);
     }
 
-    public void ThrowUp()
+    private void Jump()
     {
-        velocity.y = Mathf.Sqrt((jumpHeight * 20) * -2f * gravity);
+        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         AudioController.instance.PlayOneShot(playerController.jumpSound);
     }
 

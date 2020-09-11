@@ -9,7 +9,7 @@ public class TrapGoUp : Trap
         if (GetActivated())
         {
             Vector3 newPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z);
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, newPosition, 0.1f);
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, newPosition, 1f);
             SetActivated(false);
         }
     }

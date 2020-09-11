@@ -15,7 +15,7 @@ public class TrapThrowUp : Trap
     {
         if (GetActivated())
         {
-            player.GetComponent<PlayerMovement>().ThrowUp();
+            player.GetComponent<PlayerMovement>().ThrowPlayerUp();
             SetActivated(false);
         }
     }
