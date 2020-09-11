@@ -21,6 +21,21 @@ public class PlayerController : MonoBehaviour
         mouseLook = Camera.main.GetComponent<MouseLook>();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        switch(other.tag)
+        {
+            case Tags.GameOver:
+                GameOver();
+                break;
+            case Tags.Trap:
+                Trap trap = other.gameObject.GetComponent<TrapRunAway>();
+                if (trap != null)
+                    trap.SetActivated(true);
+                break;
+        }
+    }
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         /*
@@ -40,17 +55,21 @@ public class PlayerController : MonoBehaviour
             case Tags.Finish:
                 Finish();
                 break;
-            case Tags.GameOver:
-                GameOver();
-                break;
             case Tags.MovingPlatform:
                 gameObject.transform.parent = hit.gameObject.transform;
                 break;
             case Tags.Trap:
-                TrapGoDown trap;
+                Trap trap;
+
                 trap = hit.collider.gameObject.GetComponent<TrapGoDown>();
-                if (trap != null)
-                    trap.SetActivated(true);
+                if (trap != null) trap.SetActivated(true);
+
+                trap = hit.collider.gameObject.GetComponent<TrapGoUp>();
+                if (trap != null) trap.SetActivated(true);
+
+                trap = hit.collider.gameObject.GetComponent<TrapThrowUp>();
+                if (trap != null) trap.SetActivated(true);
+
                 break;
             default:
                 gameObject.transform.parent = null;

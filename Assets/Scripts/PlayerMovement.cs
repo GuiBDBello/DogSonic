@@ -69,6 +69,12 @@ public class PlayerMovement : MonoBehaviour
         AudioController.instance.PlayOneShot(playerController.jumpSound);
     }
 
+    public void ThrowUp()
+    {
+        velocity.y = Mathf.Sqrt((jumpHeight * 20) * -2f * gravity);
+        AudioController.instance.PlayOneShot(playerController.jumpSound);
+    }
+
     private void Crouch()
     {
         isCrouched = true;
