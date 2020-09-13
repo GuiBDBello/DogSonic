@@ -214,6 +214,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyedVersion: {fileID: 1397654349118384754, guid: fa793b26592b0ff42a8dc678e7d7653c,
     type: 3}
-  destroySound: {fileID: 0}
+  destroySound: {fileID: 8300000, guid: bb37c5bc3d132454497705e8f54c286b, type: 3}
   radius: 10
   power: 100
