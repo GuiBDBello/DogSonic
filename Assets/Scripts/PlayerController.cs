@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public LevelController levelController;
     public GameObject player;
     public AudioClip jumpSound;
+    public AudioClip bounceSound;
     public AudioClip gameOverSound;
 
     private GameController gameController;

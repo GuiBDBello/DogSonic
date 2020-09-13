@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     public void ThrowPlayerUp()
     {
         velocity.y = Mathf.Sqrt((jumpHeight * 10) * -2f * gravity);
-        AudioController.instance.PlayOneShot(playerController.jumpSound);
+        AudioController.instance.PlayOneShot(playerController.bounceSound);
     }
 
     private void Jump()
