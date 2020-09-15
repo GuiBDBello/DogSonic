@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    private void Update()
+    private void FixedUpdate()
     {
-        gameObject.transform.Rotate(new Vector3(0f, 0f, -0.5f));
+        gameObject.transform.Rotate(new Vector3(0f, 0f, -1f));
     }
 }

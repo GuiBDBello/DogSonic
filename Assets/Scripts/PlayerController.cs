@@ -1,27 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
     public LevelController levelController;
     public GameObject player;
     public AudioClip jumpSound;
     public AudioClip bounceSound;
     public AudioClip gameOverSound;
+    public AudioClip finishSound;
+    public GameObject pauseMenu;
+    public GameObject endGameMenu;
 
-    private GameController gameController;
     private PlayerMovement playerMovement;
     private MouseLook mouseLook;
+    private bool isMenuOpened = false;
 
     float pushPower = 10.0f;
 
     private void Start()
     {
-        gameController = GameObject.FindGameObjectWithTag(Tags.GameController).GetComponent<GameController>();
         playerMovement = player.GetComponent<PlayerMovement>();
         mouseLook = Camera.main.GetComponent<MouseLook>();
+    }
+
+    private void Update()
+    {
+        if (!levelController.GetGameOver())
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)) isMenuOpened = true;
+            PauseMenu();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +40,7 @@ public class PlayerController : MonoBehaviour
         switch(other.tag)
         {
             case Tags.GameOver:
-                GameOver();
+                GameOverCoroutine();
                 break;
             case Tags.Trap:
                 Trap trap = other.gameObject.GetComponent<Trap>();
@@ -53,10 +64,13 @@ public class PlayerController : MonoBehaviour
                 Checkpoint(hit.collider.gameObject);
                 break;
             case Tags.Destructible:
+                if (hit.collider.name.Contains("QMark")) levelController.AddPoints(1000);
+                if (hit.collider.name.Contains("Brick")) levelController.AddPoints(100);
                 hit.collider.gameObject.GetComponent<Destructible>().Shatter();
                 break;
             case Tags.Finish:
-                Finish();
+                //levelController.Finish(gameObject);
+                FinishLevelCoroutine();
                 break;
             case Tags.MovingPlatform:
                 gameObject.transform.parent = hit.gameObject.transform;
@@ -94,18 +108,63 @@ public class PlayerController : MonoBehaviour
         Destroy(checkpoint);
     }
 
-    private void Finish()
+    public void Resume()
     {
-        levelController.Finish();
+        isMenuOpened = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
-    private void GameOver()
+    public void Respawn()
     {
-        StartCoroutine("Respawn");
+        isMenuOpened = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        levelController.Respawn(gameObject);
     }
 
-    IEnumerator Respawn()
+    public void Restart()
     {
+        isMenuOpened = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        levelController.Restart();
+    }
+
+    public void Exit()
+    {
+        isMenuOpened = false;
+        levelController.Exit();
+    }
+
+    private void PauseMenu()
+    {
+        if (isMenuOpened)
+        {
+            playerMovement.enabled = false;
+            mouseLook.enabled = false;
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            playerMovement.enabled = true;
+            mouseLook.enabled = true;
+            pauseMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    private void GameOverCoroutine()
+    {
+        StartCoroutine("GameOver");
+    }
+
+    IEnumerator GameOver()
+    {
+        AudioController.instance.Stop();
         AudioController.instance.PlayOneShot(gameOverSound);
         mouseLook.enabled = false;
         playerMovement.enabled = false;
@@ -113,9 +172,46 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
 
-        levelController.Respawn(gameObject);
+        AudioController.instance.Play();
         player.GetComponent<CharacterController>().enabled = true;
+        levelController.Respawn(gameObject);
         mouseLook.enabled = true;
         playerMovement.enabled = true;
+    }
+
+    public void FinishLevelCoroutine()
+    {
+        StartCoroutine("FinishLevel");
+    }
+
+    IEnumerator FinishLevel()
+    {
+        levelController.SetGameOver(true);
+        SaveScore();
+
+        AudioController.instance.Stop();
+        AudioController.instance.PlayOneShot(finishSound);
+        mouseLook.enabled = false;
+        playerMovement.enabled = false;
+        player.GetComponent<CharacterController>().enabled = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        endGameMenu.SetActive(true);
+    }
+
+    private void SaveScore()
+    {
+        string levelName = SceneManager.GetActiveScene().name;
+        float points = levelController.GetPoints();
+        float highScore = PlayerPrefs.GetFloat(levelName);
+
+        Debug.Log("High Score: " + highScore);
+        Debug.Log("Points: " + points);
+
+        if (highScore == 0 || points > highScore)
+            PlayerPrefs.SetFloat(levelName, points);
     }
 }

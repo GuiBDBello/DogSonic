@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag(Tags.Player);
     }
     
-    private void Update()
+    private void FixedUpdate()
     {
         float playerDistance = Vector3.Distance(gameObject.transform.position, player.transform.position);
         if (playerDistance < 20f)

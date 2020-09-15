@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     public GameObject Enemy;
+    public float timeToSpawn = 5f;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class EnemyGenerator : MonoBehaviour
         for (;;)
         {
             Instantiate(Enemy, transform.position, transform.parent.rotation);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(timeToSpawn);
         }
     }
 }

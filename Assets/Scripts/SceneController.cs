@@ -5,14 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public void LoadSampleScene()
+    private void Start()
     {
-        SceneManager.LoadScene(Scenes.SampleScene);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void ReloadActiveScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(Scenes.MainMenu);
+    }
+
+    public void LoadSampleScene()
+    {
+        SceneManager.LoadScene(Scenes.SampleScene);
     }
 
     public void LoadLevel01()

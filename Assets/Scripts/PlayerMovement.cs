@@ -39,28 +39,30 @@ public class PlayerMovement : MonoBehaviour
     */
     private void Update()
     {
-        isGrounded = Physics.CheckCapsule(groundCheck.position, gameObject.transform.position, groundDistance, groundMask);
+        if (characterController.enabled)
+        {
+            isGrounded = Physics.CheckCapsule(groundCheck.position, gameObject.transform.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0) velocity.y = -2f;
+            if (isGrounded && velocity.y < 0) velocity.y = -2f;
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+            Vector3 move = transform.right * x + transform.forward * z;
+            characterController.Move(move * speed * Time.deltaTime);
 
-        characterController.Move(move * speed * Time.deltaTime);
+            if (Input.GetButtonDown("Jump") && isGrounded) Jump();
 
-        if (Input.GetButtonDown("Jump") && isGrounded) Jump();
+            velocity.y += gravity * Time.deltaTime;
 
-        velocity.y += gravity * Time.deltaTime;
+            characterController.Move(velocity * Time.deltaTime);
 
-        characterController.Move(velocity * Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.LeftControl)) Crouch();
+            if (isCrouched && Input.GetKeyUp(KeyCode.LeftControl)) Stand();
 
-        if (Input.GetKeyDown(KeyCode.LeftControl)) Crouch();
-        if (isCrouched && Input.GetKeyUp(KeyCode.LeftControl)) Stand();
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isCrouched) Sprint();
-        if (Input.GetKeyUp(KeyCode.LeftShift) && !isCrouched) Walk();
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !isCrouched) Sprint();
+            if (Input.GetKeyUp(KeyCode.LeftShift) && !isCrouched) Walk();
+        }
     }
 
     public float getGravity()
@@ -70,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ThrowPlayerUp()
     {
-        velocity.y = Mathf.Sqrt((jumpHeight * 10) * -2f * gravity);
+        velocity.y = Mathf.Sqrt((jumpHeight * 10f) * -2f * gravity);
         AudioController.instance.PlayOneShot(playerController.bounceSound);
     }
 
