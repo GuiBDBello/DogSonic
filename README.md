@@ -1,5 +1,9 @@
 # DogSonic
-Unexpected Platform Game
+<p align="center">
+  <img src="Screenshots/Cover.png">
+</p>
+
+Game made for the Game Jam "Unexpected Jam" between August 29th and September 13th of 2020. Theme: UNEXPECTED.
 
 ## Credits
 
