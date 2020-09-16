@@ -3,7 +3,11 @@
   <img src="Screenshots/Cover.png">
 </p>
 
-Game made for the Game Jam "Unexpected Jam" between August 29th and September 13th of 2020. Theme: UNEXPECTED.
+Game made for the Game Jam "Unexpected Jam" between August 29th and September 13th of 2020.
+
+Theme: UNEXPECTED.
+
+Página do jogo no itch.io: https://guidb.itch.io/dog-sonic
 
 ## Credits
 
