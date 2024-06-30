@@ -1,23 +1,44 @@
+<a name="readme-top"></a>
+
 <p align="center">
-  <img src="Screenshots/Cover.png">
+  <a href="https://github.com/GuiBDBello/DogSonic">
+    <img alt="Dog Sonic" title="Dog Sonic" src="images/logo.png" width="450">
+  </a>
 </p>
 
-## Play
+<p align="center">
+  Unexpected Platform Game.
+  <br />
+  <br />
+  <a href="https://guibdbello.itch.io/dog-sonic">Play Game</a>
+  ·
+  <a href="https://github.com/GuiBDBello/DogSonic/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+  ·
+  <a href="https://github.com/GuiBDBello/DogSonic/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+</p>
 
-Game page on itch.io: https://guibdbello.itch.io/dog-sonic
+## Table of Contents
+
+<ol>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#getting-started">Getting Started</a></li>
+  <li><a href="#build-process">Build Process</a></li>
+  <li><a href="#acknowledgments">Acknowledgments</a></li>
+  <li><a href="#license">License</a></li>
+</ol>
+
+## Introduction
+
+It's like Cat Mario (hence the name), but in first person.
 
 <p align="center">
-  <img src="Screenshots/dog-sonic-min.gif">
+  <img alt="Dog Sonic" title="Dog Sonic" src="images/game.gif">
 </p>
 <p align="center">
-  <img src="Screenshots/dog-sonic-uncut-min.gif">
+  <img alt="Dog Sonic" title="Dog Sonic" src="images/game2.gif">
 </p>
 
 ### How to Play
-
-When you see a civilian throwing trash in the street, get closer and click on him with your mouse to start a conversation, then click on the trash he has thrown away to aware him to pick it up and toss it in the trash bin.
-
-#### Controls
 
 - **WASD**: Move.
 - **Mouse**: Look.
@@ -25,47 +46,61 @@ When you see a civilian throwing trash in the street, get closer and click on hi
 - **Shift**: Run/Sprint.
 - **Ctrl**: Crouch.
 
-## About
-
-Unexpected Platform Game. It's like Cat Mario (hence the name), but in first person.
-
 ### Game Jam
 
-This game was made for the game jam [**Unexpected Jam**](https://itch.io/jam/unexpectedjam) which took place between August 29th and September 13th of 2020.
+This game was made for the game jam [Unexpected Jam](https://itch.io/jam/unexpectedjam), which took place between August 29th and September 13th of 2020.
 
 Theme: **Unexpected**.
 
-## Setup
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Installation
+## Getting Started
 
-1. Clone repository: `git clone https://github.com/GuiBDBello/DogSonic.git`.
-2. Add the project to Unity Hub: `ADD > Select the folder you just cloned`.
-3. Select the project to open.
+To get a local copy up and running follow the steps below.
 
-### Development
+### Prerequisites
 
-1. Use Unity interface to change the levels.
-2. Use your favorite IDE/Text Editor to code (I recommend Visual Studio or Visual Studio Code).
+1. [Unity](https://unity.com/download)
 
-**Obs.:** Some links that may be helpful:
+### Configuration
 
-- https://learn.unity.com
-- https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA
+1. Clone repository: `git clone https://github.com/GuiBDBello/Conscientize.git`.
+1. Add the project to Unity or Unity Hub: `ADD > Select the folder you just cloned`.
+1. Open project.
 
-### Build
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-1. In Unity, with the project open, go to `File > Build Settings...` then select `Build`.
+## Build Process
 
-## Credits
+1. With your project opened in Unity, select `File > Build Settings...`.
+1. Select the `Platform` that you wish to build for (you may have to install a build module if you don't have it already installed).
+1. Select `Build` or `Build And Run`.
 
-### Textures:
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Grass: https://br.pinterest.com/pin/367254544608654295/
-- Mario Box: http://fav.me/d1wxrl7
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Sounds:
+## Acknowledgments
 
-- Bensound (main menu music): https://www.bensound.com/royalty-free-music/track/relaxing
-- Super Mario Bros. (NES) Sound Clips: https://themushroomkingdom.net/media/smb/wav
-- vgmpf (game music): http://www.vgmpf.com/Wiki/images/f/f0/01_-_Syobon_Action_-_W32_-_Titerman.ogg
+List of references that were useful in the making of this project:
+
+* [Unity Learn](https://learn.unity.com/)
+* [Brackeys](https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA)
+
+### Assets
+
+| Name | Type | Creator | Source |
+| --- | --- | --- | --- |
+| Grass | Texture | [Google](https://br.pinterest.com/google/) | [Pinterest](https://br.pinterest.com/pin/367254544608654295/) |
+| Mario Box | Texture | [ElectricCoffee](https://www.deviantart.com/electriccoffee/gallery) | [Deviant Art](http://fav.me/d1wxrl7) |
+| Game Theme Song | Audio | [Chiku](https://www.vgmpf.com/Wiki/index.php/Syobon_Action_(W32)#Music) | [Video Game Music Preservation Foundation](http://www.vgmpf.com/Wiki/images/f/f0/01_-_Syobon_Action_-_W32_-_Titerman.ogg) |
+| Main Menu Theme Song | Audio | [Benjamin Tissot](https://www.bensound.com/royalty-free-music?composer=84) | [Bensound](https://www.bensound.com/royalty-free-music/track/relaxing) |
+| Super Mario Bros. (NES) Sound Clips | Audio | [Deezer](https://themushroomkingdom.net/media/smb/wav) | [The Mushroom Kingdom](https://themushroomkingdom.net/media/smb/wav) |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## License
+
+Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
