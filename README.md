@@ -64,7 +64,7 @@ To get a local copy up and running follow the steps below.
 
 ### Configuration
 
-1. Clone repository: `git clone https://github.com/GuiBDBello/Conscientize.git`.
+1. Clone repository: `git clone https://github.com/GuiBDBello/DogSonic.git`.
 1. Add the project to Unity or Unity Hub: `ADD > Select the folder you just cloned`.
 1. Open project.
 
